@@ -3,10 +3,11 @@
 
 (require 'package)
 
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 
 (package-initialize)
+(package-refresh-contents)
 
 (mapc (lambda (package) 
 	(or (package-installed-p package)
@@ -14,7 +15,8 @@
       '(magit 
 	paredit 
 	color-theme-solarized
-	auto-complete))
+	auto-complete
+	org))
 
 ;;;;;;;;;;;;;;;
 ;; Paredit
@@ -45,9 +47,13 @@
 (defun apply-font (frame)
   (select-frame frame)
   (when (window-system frame)
-    (set-frame-font "-unknown-Ubuntu Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1")
+    (set-frame-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1")
     (set-face-attribute 'default nil :height 160)))
 
 (add-hook 'after-make-frame-functions 'apply-font)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; local settings
+
+(load (expand-file-name "~/emacs/elisp/local-settings.el"))
 
