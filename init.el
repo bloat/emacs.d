@@ -53,6 +53,11 @@
 (add-hook 'after-make-frame-functions 'apply-font)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Simple settings
+
+(setq-default truncate-lines t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; local settings
 
 (load (expand-file-name "~/emacs/elisp/local-settings.el"))
