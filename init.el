@@ -16,12 +16,16 @@
 	paredit 
 	color-theme-solarized
 	auto-complete
-	org))
+	org
+	ac-slime
+	cider
+	ac-nrepl))
 
 ;;;;;;;;;;;;;;;
 ;; Paredit
 
 (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
+(add-hook 'clojure-mode-hook #'enable-paredit-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Appearance
@@ -51,6 +55,34 @@
     (set-face-attribute 'default nil :height 160)))
 
 (add-hook 'after-make-frame-functions 'apply-font)
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Auto Complete
+
+(require 'auto-complete-config)
+(ac-config-default)
+
+(add-hook 'slime-mode-hook 'set-up-slime-ac)
+(add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'slime-repl-mode))
+
+(require 'ac-nrepl)
+(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
+(add-hook 'cider-mode-hook 'ac-nrepl-setup)
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'cider-repl-mode))
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Key bindings
+
+(when (eq system-type 'darwin)
+  (global-set-key (kbd "M-3") '(lambda () (interactive) (insert "#"))))
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Common Lisp
+
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Simple settings
