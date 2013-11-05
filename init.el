@@ -90,6 +90,11 @@
 (setq-default truncate-lines t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Key bindings
+
+(global-set-key (kbd "C-c m") 'magit-status)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; local settings
 
 (load (expand-file-name "~/emacs/elisp/local-settings.el"))
