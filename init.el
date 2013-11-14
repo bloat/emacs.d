@@ -95,6 +95,31 @@
 (global-set-key (kbd "C-c m") 'magit-status)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Magit
+
+(defun my-magit-default-tracking-name-fn (remote branch)
+  "Just use the remote branch name directly"
+  branch)
+
+(setq magit-default-tracking-name-function #'my-magit-default-tracking-name-fn)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Ack
+
+(defvar ack-history nil
+  "History for the `ack' command.")
+
+(defun ack (command-args)
+  (interactive
+   (let ((ack-command "ack-grep --nogroup --with-filename --all "))
+     (list (read-shell-command "Run ack (like this): "
+                               ack-command
+                               'ack-history))))
+  (let ((compilation-disable-input t))
+    (compilation-start (concat command-args " < " null-device)
+                       'grep-mode)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; local settings
 
 (load (expand-file-name "~/emacs/elisp/local-settings.el"))
