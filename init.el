@@ -120,6 +120,14 @@
                        'grep-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Ediff
+
+;; Store window config so that it can be restored when ediff quits.
+(defvar my-pre-ediff-window-config)
+(add-hook 'ediff-before-setup-hook (lambda () (setq my-pre-ediff-window-config (current-window-configuration))))
+(add-hook 'ediff-quit-hook (lambda () (set-window-configuration my-pre-ediff-window-config)) 'append)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; local settings
 
 (load (expand-file-name "~/emacs/elisp/local-settings.el"))
