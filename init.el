@@ -21,12 +21,6 @@
 	cider
 	ac-nrepl))
 
-;;;;;;;;;;;;;;;
-;; Paredit
-
-(add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
-(add-hook 'clojure-mode-hook #'enable-paredit-mode)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Appearance
 
@@ -57,23 +51,6 @@
 (add-hook 'after-make-frame-functions 'apply-font)
 
 ;;;;;;;;;;;;;;;;;;;;;
-;; Auto Complete
-
-(require 'auto-complete-config)
-(ac-config-default)
-
-(add-hook 'slime-mode-hook 'set-up-slime-ac)
-(add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
-(eval-after-load "auto-complete"
-  '(add-to-list 'ac-modes 'slime-repl-mode))
-
-(require 'ac-nrepl)
-(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
-(add-hook 'cider-mode-hook 'ac-nrepl-setup)
-(eval-after-load "auto-complete"
-  '(add-to-list 'ac-modes 'cider-repl-mode))
-
-;;;;;;;;;;;;;;;;;;;;;
 ;; Key bindings
 
 (when (eq system-type 'darwin)
@@ -88,6 +65,17 @@
 ;; Simple settings
 
 (setq-default truncate-lines t)
+(setq ring-bell-function #'ignore)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Backups 
+
+(setq backup-directory-alist `(("." . "~/.emacs-backups")))
+(setq backup-by-copying t)
+(setq delete-old-versions t)
+(setq kept-new-versions 6)
+(setq kept-old-versions 2)
+(setq version-control t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Key bindings
@@ -126,6 +114,29 @@
 (defvar my-pre-ediff-window-config)
 (add-hook 'ediff-before-setup-hook (lambda () (setq my-pre-ediff-window-config (current-window-configuration))))
 (add-hook 'ediff-quit-hook (lambda () (set-window-configuration my-pre-ediff-window-config)) 'append)
+
+;;;;;;;;;;;;;;;
+;; Paredit
+
+(add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
+(add-hook 'clojure-mode-hook #'enable-paredit-mode)
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Auto Complete
+
+(require 'auto-complete-config)
+(ac-config-default)
+
+(add-hook 'slime-mode-hook 'set-up-slime-ac)
+(add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'slime-repl-mode))
+
+(require 'ac-nrepl)
+(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
+(add-hook 'cider-mode-hook 'ac-nrepl-setup)
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'cider-repl-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; local settings
