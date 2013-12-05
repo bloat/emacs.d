@@ -46,7 +46,7 @@
   (select-frame frame)
   (when (window-system frame)
     (set-frame-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1")
-    (set-face-attribute 'default nil :height 160)))
+    (set-face-attribute 'default nil :height 140)))
 
 (add-hook 'after-make-frame-functions 'apply-font)
 
@@ -66,6 +66,10 @@
 
 (setq-default truncate-lines t)
 (setq ring-bell-function #'ignore)
+(ido-mode)
+(setq ido-enable-flex-matching t)
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Backups 
@@ -142,4 +146,3 @@
 ;; local settings
 
 (load (expand-file-name "~/emacs/elisp/local-settings.el"))
-
