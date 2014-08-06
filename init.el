@@ -143,6 +143,16 @@
   '(add-to-list 'ac-modes 'cider-repl-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Customize
+
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Org
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; local settings
 
 (load (expand-file-name "~/emacs/elisp/local-settings.el"))
+

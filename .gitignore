@@ -4,4 +4,6 @@ elpa
 *~
 ac-comphist.dat
 tramp
-
+custom.el
+eproject.lst
+abbrev_defs
