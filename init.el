@@ -70,6 +70,7 @@
 (setq ido-enable-flex-matching t)
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
+(setq-default indent-tabs-mode nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Backups 
