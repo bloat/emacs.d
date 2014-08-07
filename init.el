@@ -37,7 +37,9 @@
 (if window-system
     (load-theme 'sanityinc-solarized-dark t))
 
-(set-frame-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1")
+(set-frame-font (if (eq system-type 'windows-nt)
+                    "-outline-Consolas-normal-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
+                  "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"))
 (set-face-attribute 'default nil :height 140)
 
 ;;;;;;;;;;;;;;;;;;;;;
