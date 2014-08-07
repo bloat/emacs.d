@@ -1,3 +1,8 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; local settings
+
+(load (expand-file-name "~/emacs/elisp/pre-local-settings.el"))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Package management
 
@@ -14,12 +19,13 @@
 	    (package-install package)))
       '(magit 
 	paredit 
-	color-theme-solarized
+	color-theme-sanityinc-solarized
 	auto-complete
 	org
 	ac-slime
 	cider
-	ac-nrepl))
+	ac-nrepl
+        s))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Appearance
@@ -28,27 +34,11 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
-(require 'color-theme)
-(color-theme-initialize)
+(if window-system
+    (load-theme 'sanityinc-solarized-dark t))
 
-(defun apply-color-theme (frame)
-  "Apply color theme to a frame based on whether its a 'real'
-   window or a console window."
-  (select-frame frame)
-  (if (window-system frame)
-      (color-theme-solarized-dark)
-    (color-theme-charcoal-black)))
-
-(setq color-theme-is-global nil)
-(add-hook 'after-make-frame-functions 'apply-color-theme)
-
-(defun apply-font (frame)
-  (select-frame frame)
-  (when (window-system frame)
-    (set-frame-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1")
-    (set-face-attribute 'default nil :height 140)))
-
-(add-hook 'after-make-frame-functions 'apply-font)
+(set-frame-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1")
+(set-face-attribute 'default nil :height 140)
 
 ;;;;;;;;;;;;;;;;;;;;;
 ;; Key bindings
@@ -71,6 +61,7 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 (setq-default indent-tabs-mode nil)
+(require 's)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Backups 
@@ -155,5 +146,5 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; local settings
 
-(load (expand-file-name "~/emacs/elisp/local-settings.el"))
+(load (expand-file-name "~/emacs/elisp/post-local-settings.el"))
 
